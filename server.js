@@ -3,10 +3,10 @@
 //
 var http = require('http');
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongodb = require('./config/mongo.db');
-var userroutes_v1 = require('./api/user.routes.v1');
+var reciperoutes_v1 = require('./api/recipe.routes.v1');
 // var auth_routes_v1 = require('./api/authentication.routes.v1');
 var config = require('./config/env/env');
 // var expressJWT = require('express-jwt');
@@ -69,7 +69,7 @@ app.use(function (req, res, next) {
 
 // Installeer de routers
 // app.use('/api/v1', auth_routes_v1);
-app.use('/api/v1', userroutes_v1);
+app.use('/api/v1', reciperoutes_v1);
 
 // Errorhandler voor express-jwt errors
 // Wordt uitgevoerd wanneer err != null; anders door naar next().
@@ -95,7 +95,7 @@ app.use('*', function (req, res) {
 // Installatie klaar; start de server.
 app.listen(config.env.webPort, function () {
     console.log('De server luistert op port ' + app.get('port'));
-    console.log('Zie bijvoorbeeld http://localhost:3000/api/v1/users');
+    console.log('Zie bijvoorbeeld http://localhost:3000/api/v1/recipes');
 });
 
 // Voor testen met mocha/chai moeten we de app exporteren.

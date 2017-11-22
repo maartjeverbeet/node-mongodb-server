@@ -1,24 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+//const ShoppinglistSchema = require('./shoppinglist.model');
 
 const RecipeSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, 'Name is required']
-    },
+    name: String,
     description: String,
-    imagePath: String,
-    Ingredients: [ShoppinglistSchema]
+    imagePath: String
 }, {
     timestamps: true
 });
 
 
-const User = mongoose.model('user', RecipeSchema);
+const Recipe = mongoose.model('recipe', RecipeSchema);
 
 // Add a 'dummy' user (every time you require this file!)
-const user = new User({
+const recipe = new Recipe({
     name: 'Joe',
+    description: 'test',
+    imagePath: 'test'
 }).save();
 
-module.exports = User;
+module.exports = Recipe;
