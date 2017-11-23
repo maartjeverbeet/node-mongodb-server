@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 const RecipeSchema = new Schema({
     name: String,
     description: String,
-    imagePath: String
+    imagePath: String,
+    ingredients: [{
+        name: String,
+        amount: Number
+    }]
 }, {
     timestamps: true
 });
@@ -17,7 +21,16 @@ const Recipe = mongoose.model('recipe', RecipeSchema);
 const recipe = new Recipe({
     name: 'Joe',
     description: 'test',
-    imagePath: 'test'
+    imagePath: 'test',
+    ingredients:[ {
+        "name": 'kaas',
+        "amount": 20
+    },
+        {
+            "name": 'peer',
+            "amount": 50
+        }]
+
 }).save();
 
 module.exports = Recipe;
