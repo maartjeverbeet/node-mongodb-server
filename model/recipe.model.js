@@ -17,21 +17,4 @@ const RecipeSchema = new Schema({
 
 const Recipe = mongoose.model('recipe', RecipeSchema);
 
-// Add a 'dummy' user (every time you require this file!)
-const recipe = new Recipe({
-    name: 'Joe',
-    description: 'test',
-    imagePath: 'test',
-    ingredients:[ {
-        "name": 'kaas',
-        "amount": 20
-    },
-        {
-            "name": 'peer',
-            "amount": 50
-        }]
-
-}).save();
-//
-
 module.exports = Recipe;

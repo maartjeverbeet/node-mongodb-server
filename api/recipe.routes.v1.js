@@ -32,11 +32,11 @@ routes.get('/recipes/:id', function(req, res) {
 // Voeg een user toe. De nieuwe info wordt gestuurd via de body van de request message.
 // Vorm van de URL: POST http://hostname:3000/api/v1/users
 //
-routes.post('/recipes', function(req, res) {
+routes.post('/recipes', function(req, res, next) {
     const recipeReq = req.body;
     Recipe.create(recipeReq)
         .then(recipe => res.send(recipe))
-        .catch((error) => res.status(401).json(error));
+        .catch(next);
 });
 
 //
@@ -46,7 +46,14 @@ routes.post('/recipes', function(req, res) {
 // 
 // Vorm van de URL: PUT http://hostname:3000/api/v1/users/23
 //
-routes.put('/recipes/:id', function(req, res) {
+routes.put('/recipes/:id', function(req, res, next) {
+    const recipeId = req.params.id;
+    const recipeP = req.body;
+
+    Recipe.findByIdAndUpdate({ _id: recipeId},recipeP)
+        .then(()=> Recipe.findByIdAndUpdate({ _id: recipeId}))
+        .then(recipe => res.send(recipe))
+        .catch(next);
 
 });
 
@@ -57,11 +64,12 @@ routes.put('/recipes/:id', function(req, res) {
 // 
 // Vorm van de URL: DELETE http://hostname:3000/api/v1/users/23
 //
-routes.delete('/recipes/:id', function(req, res) {
+routes.delete('/recipes/:id', function(req, res, next) {
     const recipeId = req.params.id;
 
     Recipe.findByIdAndRemove({_id: recipeId})
-        .then()
+        .then(recipe=>res.status(204).send(recipe))
+        .catch(next);
 });
 
 module.exports = routes;
