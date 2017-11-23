@@ -25,7 +25,13 @@ routes.get('/recipes', function(req, res) {
 // Vorm van de URL: http://hostname:3000/api/v1/users/23
 //
 routes.get('/recipes/:id', function(req, res) {
+    const recipeId = req.params.id;
 
+    Recipe.findOne({_id: recipeId})
+        .then((recipe)=>{
+            res.status(200).json(recipe);
+        })
+        .catch((error) => res.status(401).json(error));
 });
 
 //
