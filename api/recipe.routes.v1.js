@@ -33,7 +33,10 @@ routes.get('/recipes/:id', function(req, res) {
 // Vorm van de URL: POST http://hostname:3000/api/v1/users
 //
 routes.post('/recipes', function(req, res) {
-
+    const recipeReq = req.body;
+    Recipe.create(recipeReq)
+        .then(recipe => res.send(recipe))
+        .catch((error) => res.status(401).json(error));
 });
 
 //
@@ -55,7 +58,10 @@ routes.put('/recipes/:id', function(req, res) {
 // Vorm van de URL: DELETE http://hostname:3000/api/v1/users/23
 //
 routes.delete('/recipes/:id', function(req, res) {
+    const recipeId = req.params.id;
 
+    Recipe.findByIdAndRemove({_id: recipeId})
+        .then()
 });
 
 module.exports = routes;
