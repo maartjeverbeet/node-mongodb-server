@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 //const ShoppinglistSchema = require('./shoppinglist.model');
 
 const RecipeSchema = new Schema({
-    name: String,
+    name: {type: String, required: true},
     description: String,
     imagePath: String,
-    ingredients: [{
-        name: String,
-        amount: Number
-    }]
+    ingredients: {type:[{
+        name: {type: String, required: true},
+        amount: {type: Number, required: true}
+    }],required:true}
 }, {
     timestamps: true
 });
