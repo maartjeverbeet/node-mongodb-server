@@ -28,10 +28,10 @@ routes.get('/recipes/:id', function(req, res) {
     const recipeId = req.params.id;
 
     Recipe.findOne({_id: recipeId})
-        .then((recipe)=>{
+        .then((recipe) => {
             res.status(200).json(recipe);
         })
-        .catch((error) => res.status(401).json(error));
+        .catch((error) => res.status(400).json(error));
 });
 
 //
@@ -41,8 +41,8 @@ routes.get('/recipes/:id', function(req, res) {
 routes.post('/recipes', function(req, res, next) {
     const recipeReq = req.body;
     Recipe.create(recipeReq)
-        .then(recipe => res.send(recipe))
-        .catch(next);
+        .then(recipe => res.status(200).send(recipe))
+        .catch((error) => res.status(400).json(error))
 });
 
 //
@@ -59,7 +59,7 @@ routes.put('/recipes/:id', function(req, res, next) {
     Recipe.findByIdAndUpdate({ _id: recipeId},recipeP)
         .then(()=> Recipe.findByIdAndUpdate({ _id: recipeId}))
         .then(recipe => res.send(recipe))
-        .catch(next);
+        .catch((error) => res.status(400).json(error))
 
 });
 
@@ -74,8 +74,8 @@ routes.delete('/recipes/:id', function(req, res, next) {
     const recipeId = req.params.id;
 
     Recipe.findByIdAndRemove({_id: recipeId})
-        .then(recipe=>res.status(204).send(recipe))
-        .catch(next);
+        .then(recipe => res.status(204).send(recipe))
+        .catch((error) => res.status(400).json(error))
 });
 
 module.exports = routes;
