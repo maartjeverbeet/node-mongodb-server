@@ -27,7 +27,7 @@ routes.get('/recipes', function(req, res) {
 routes.get('/recipes/:id', function(req, res) {
     const recipeId = req.params.id;
 
-    Recipe.findOne({_id: recipeId})
+    Recipe.findOne({id: recipeId})
         .then((recipe)=>{
             res.status(200).json(recipe);
         })
