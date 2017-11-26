@@ -30,16 +30,6 @@ app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 })); // parse application/vnd.api+json as json
 
-// Beveilig alle URL routes, tenzij het om /login of /register gaat.
-// app.use(expressJWT({
-//     secret: config.secretkey
-// }).unless({
-//     path: [
-//         { url: '/api/v1/login', methods: ['POST'] },
-//         { url: '/api/v1/register', methods: ['POST'] }
-//     ]
-// }));
-
 // configureer de app
 app.set('port', (process.env.PORT || config.env.webPort));
 app.set('env', (process.env.ENV || 'development'))
