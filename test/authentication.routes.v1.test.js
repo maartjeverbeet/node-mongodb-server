@@ -41,7 +41,7 @@ describe('Auth API v1', function() {
                 res.should.be.json;
                 res.body.should.be.an('object');
                 res.body.should.have.property('error').that.is.a('string');
-                res.body.error.should.equal('Invalid credentials, bye')
+                res.body.error.should.equal('Invalid credentials, bye');
                 done();
             });
     });
