@@ -1,7 +1,7 @@
 var express = require('express');
 var routes = express.Router();
 var mongodb = require('../config/mongo.db');
-var Ingredient = require('../model/ingredient.model');
+var Ingredient = require('../model/shoppinglist.model');
 
 routes.get('/ingredients', function(req, res) {
     res.contentType('application/json');
@@ -43,3 +43,5 @@ routes.delete('/ingredients/:id', function(req, res, next) {
         .then(ingredient=>res.status(204).send(ingredient))
         .catch(next);
 });
+
+module.exports = routes;

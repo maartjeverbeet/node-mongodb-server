@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ShoppingListSchema = new Schema({
-    ingrediënt: [{
-        name: String,
-        amount: Number
-    }]
+    name: {type: String, required: true},
+    amount: {type: Number}
 }, {
     timestamps: true
 });
